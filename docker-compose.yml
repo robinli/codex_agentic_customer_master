@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: agentic_customer_master
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/agentic_customer_master
+      JWT_SECRET: change-me
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      AGENT_MODEL: ${AGENT_MODEL:-gpt-5.4-mini}
+      AGENT_REASONING_EFFORT: ${AGENT_REASONING_EFFORT:-medium}
+      CORS_ORIGINS: http://localhost:3000
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:8000/api/v1
+      API_BASE_URL_SERVER: http://backend:8000/api/v1
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:

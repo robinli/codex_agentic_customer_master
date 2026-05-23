@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-mist text-ink font-sans;
+  background-image:
+    radial-gradient(circle at top left, rgba(183, 134, 40, 0.12), transparent 28%),
+    linear-gradient(135deg, rgba(37, 89, 74, 0.08), transparent 42%);
+}
+
+.panel {
+  @apply rounded-3xl border border-black/5 bg-white/90 shadow-sm backdrop-blur;
+}
+

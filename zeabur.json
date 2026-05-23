@@ -1,0 +1,14 @@
+{
+  "services": [
+    {
+      "name": "backend",
+      "root": "backend",
+      "run": "python scripts/init_db.py && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    },
+    {
+      "name": "frontend",
+      "root": "frontend",
+      "run": "npm run start -- --hostname 0.0.0.0 --port $PORT"
+    }
+  ]
+}
