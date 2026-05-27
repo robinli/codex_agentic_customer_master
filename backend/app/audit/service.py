@@ -1,5 +1,6 @@
 import uuid
 
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -26,9 +27,9 @@ def write_audit_log(
         action=action,
         target_type=target_type,
         target_id=uuid.UUID(target_id) if target_id else None,
-        before_data=before_data,
-        after_data=after_data,
-        metadata_json=metadata,
+        before_data=jsonable_encoder(before_data),
+        after_data=jsonable_encoder(after_data),
+        metadata_json=jsonable_encoder(metadata),
     )
     db.add(entry)
     return entry

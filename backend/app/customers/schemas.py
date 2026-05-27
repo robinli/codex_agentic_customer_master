@@ -1,6 +1,7 @@
 from datetime import datetime
 from decimal import Decimal
 from typing import Any
+import uuid
 
 from pydantic import BaseModel, EmailStr, Field
 
@@ -19,7 +20,8 @@ class CustomerContactCreate(CustomerContactBase):
 
 
 class CustomerContactRead(CustomerContactBase):
-    id: str
+    id: uuid.UUID
+    email: str | None = None
     created_at: datetime
     updated_at: datetime
 
@@ -40,7 +42,7 @@ class CustomerAddressCreate(CustomerAddressBase):
 
 
 class CustomerAddressRead(CustomerAddressBase):
-    id: str
+    id: uuid.UUID
     created_at: datetime
     updated_at: datetime
 
@@ -100,7 +102,7 @@ class DisableCustomerRequest(BaseModel):
 
 
 class CustomerRead(BaseModel):
-    id: str
+    id: uuid.UUID
     customer_code: str
     customer_name: str
     tax_id: str | None
@@ -108,16 +110,16 @@ class CustomerRead(BaseModel):
     status: str
     industry: str | None
     phone: str | None
-    email: EmailStr | None
+    email: str | None
     website: str | None
     payment_terms: str | None
     credit_limit: Decimal | None
-    sales_owner_id: str | None
+    sales_owner_id: uuid.UUID | None
     note: str | None
     created_at: datetime
     updated_at: datetime
-    created_by: str
-    updated_by: str
+    created_by: uuid.UUID
+    updated_by: uuid.UUID
     contacts: list[CustomerContactRead]
     addresses: list[CustomerAddressRead]
 
@@ -125,14 +127,14 @@ class CustomerRead(BaseModel):
 
 
 class CustomerListItem(BaseModel):
-    id: str
+    id: uuid.UUID
     customer_code: str
     customer_name: str
     tax_id: str | None
     customer_type: str
     status: str
     phone: str | None
-    email: EmailStr | None
+    email: str | None
     updated_at: datetime
 
     model_config = {"from_attributes": True}

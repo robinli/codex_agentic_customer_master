@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime, timezone
 
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -40,8 +41,8 @@ def create_approval_request(
         target_id=uuid.UUID(target_id),
         action=action,
         risk_level=risk_level,
-        before_data=before_data,
-        after_data=after_data,
+        before_data=jsonable_encoder(before_data),
+        after_data=jsonable_encoder(after_data),
         reason=reason,
         requested_by=uuid.UUID(requested_by),
     )
