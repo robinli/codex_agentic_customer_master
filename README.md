@@ -8,6 +8,10 @@ Monorepo for a customer master maintenance system with:
 
 ![Agentic Customer Master infographic](docs/images/agentic-customer-master-infographic.png)
 
+## Agent Chat CRUD
+
+![Agent Chat customer CRUD infographic](docs/images/agent-chat-crud-infographic.svg)
+
 ## Structure
 
 ```text

@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Chat customer CRUD infographic</title>
+  <desc id="desc">Infographic showing how Agent Chat converts natural-language requests into customer create, read, update, and delete or disable operations through guarded backend tools.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3f7ef"/>
+      <stop offset="0.58" stop-color="#fbfcfa"/>
+      <stop offset="1" stop-color="#eef5ee"/>
+    </linearGradient>
+    <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102a3a"/>
+      <stop offset="1" stop-color="#071b2a"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f6a56"/>
+      <stop offset="1" stop-color="#0d8a80"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d28a13"/>
+      <stop offset="1" stop-color="#b7660d"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#0a1f2f" flood-opacity="0.10"/>
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#0a1f2f" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowNavy" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#102a3a"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#1f6a56"/>
+    </marker>
+    <marker id="arrowGold" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#c47a10"/>
+    </marker>
+    <style>
+      .serif { font-family: Georgia, "Times New Roman", serif; }
+      .sans { font-family: Inter, "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif; }
+      .eyebrow { fill: #0f5d55; font-size: 16px; letter-spacing: 9px; font-weight: 700; }
+      .title { fill: #071b2a; font-size: 62px; font-weight: 500; }
+      .subtitle { fill: #22524d; font-size: 25px; font-weight: 800; letter-spacing: 4px; }
+      .body { fill: #1c2f3d; font-size: 23px; }
+      .small { fill: #667783; font-size: 18px; }
+      .label { fill: #0b2335; font-size: 24px; font-weight: 800; }
+      .white { fill: #fff; }
+      .muted { fill: #f1f3f2; }
+      .outline { stroke: #dce5df; stroke-width: 2; }
+      .dash { stroke: #d7ded9; stroke-width: 2; stroke-dasharray: 6 8; fill: none; }
+      .navyText { fill: #102a3a; }
+      .greenText { fill: #1f6a56; }
+      .goldText { fill: #bc740f; }
+      .toolName { fill: #c57a12; font-size: 16px; letter-spacing: 1px; font-weight: 800; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1460" cy="120" r="120" fill="#e6efe8" opacity="0.55"/>
+  <circle cx="180" cy="770" r="150" fill="#e9f1e9" opacity="0.55"/>
+
+  <text x="80" y="72" class="sans eyebrow">AGENTIC CRM</text>
+  <text x="80" y="128" class="serif title">Agent Chat CRUD</text>
+  <text x="82" y="168" class="sans subtitle">自然語言驅動的客戶主檔操作</text>
+
+  <g filter="url(#shadow)">
+    <rect x="64" y="226" width="246" height="572" rx="32" fill="#ffffff"/>
+    <text x="94" y="286" class="sans eyebrow" style="font-size:13px;letter-spacing:7px;">CUSTOMER MASTER</text>
+    <text x="94" y="334" class="serif" style="fill:#071b2a;font-size:39px;">Agent Chat</text>
+    <rect x="94" y="386" width="176" height="48" rx="24" fill="url(#green)"/>
+    <text x="122" y="418" class="sans white" style="font-size:20px;font-weight:800;">Natural Ops</text>
+    <text x="94" y="486" class="sans body">Customers</text>
+    <text x="94" y="548" class="sans body">Approvals</text>
+    <text x="94" y="610" class="sans body">Audit Log</text>
+    <rect x="94" y="706" width="176" height="48" rx="18" fill="#fff" stroke="#d5dfd8"/>
+    <text x="133" y="738" class="sans" style="fill:#102a3a;font-size:18px;font-weight:800;">Guarded tools</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="360" y="226" width="442" height="572" rx="34" fill="#ffffff"/>
+    <text x="394" y="278" class="sans eyebrow" style="font-size:15px;">CHAT INPUT</text>
+    <rect x="394" y="315" width="374" height="58" rx="29" fill="url(#navy)"/>
+    <text x="424" y="352" class="sans white" style="font-size:20px;font-weight:800;">新增客戶：五十嵐紅茶 統編99990001</text>
+    <rect x="394" y="412" width="374" height="58" rx="29" fill="url(#navy)"/>
+    <text x="424" y="449" class="sans white" style="font-size:20px;font-weight:800;">查詢統編 98740000 的客戶</text>
+    <rect x="394" y="509" width="374" height="58" rx="29" fill="url(#navy)"/>
+    <text x="424" y="546" class="sans white" style="font-size:20px;font-weight:800;">將小小資訊電話改為 07-7770000</text>
+    <rect x="394" y="606" width="374" height="58" rx="29" fill="url(#navy)"/>
+    <text x="424" y="643" class="sans white" style="font-size:20px;font-weight:800;">停用測試客戶 INACT001</text>
+    <rect x="394" y="704" width="374" height="54" rx="18" fill="#f7f8f7" stroke="#dce5df"/>
+    <text x="424" y="738" class="sans small">使用者只要輸入自然語言，不需要記 API 或表單欄位</text>
+  </g>
+
+  <path d="M818 512 C875 512 882 512 922 512" stroke="#102a3a" stroke-width="5" fill="none" marker-end="url(#arrowNavy)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="940" y="204" width="330" height="616" rx="34" fill="#ffffff"/>
+    <text x="974" y="256" class="sans eyebrow" style="font-size:15px;">BACKEND TOOL CALLS</text>
+
+    <g transform="translate(974 294)">
+      <rect width="262" height="92" rx="22" fill="#f7faf8" stroke="#d7e3dc"/>
+      <circle cx="48" cy="46" r="30" fill="#e8f2ec"/>
+      <path d="M38 48 h20 M48 38 v20" stroke="#1f6a56" stroke-width="7" stroke-linecap="round"/>
+      <text x="94" y="38" class="sans label">Create</text>
+      <text x="94" y="66" class="sans toolName">CUSTOMER.CREATE</text>
+    </g>
+
+    <g transform="translate(974 415)">
+      <rect width="262" height="92" rx="22" fill="#f7faf8" stroke="#d7e3dc"/>
+      <circle cx="48" cy="46" r="30" fill="#eef3f0"/>
+      <circle cx="43" cy="42" r="17" fill="none" stroke="#102a3a" stroke-width="6"/>
+      <path d="M58 58 l15 15" stroke="#102a3a" stroke-width="7" stroke-linecap="round"/>
+      <text x="94" y="38" class="sans label">Read</text>
+      <text x="94" y="66" class="sans toolName">CUSTOMER.SEARCH</text>
+    </g>
+
+    <g transform="translate(974 536)">
+      <rect width="262" height="92" rx="22" fill="#f7faf8" stroke="#d7e3dc"/>
+      <circle cx="48" cy="46" r="30" fill="#fff3df"/>
+      <path d="M36 59 l28 -28 l12 12 l-28 28 h-12 z" fill="#c47a10"/>
+      <text x="94" y="38" class="sans label">Update</text>
+      <text x="94" y="66" class="sans toolName">CUSTOMER.UPDATE</text>
+    </g>
+
+    <g transform="translate(974 657)">
+      <rect width="262" height="92" rx="22" fill="#f7faf8" stroke="#d7e3dc"/>
+      <circle cx="48" cy="46" r="30" fill="#eef3f0"/>
+      <path d="M35 35 l26 26 M61 35 l-26 26" stroke="#1f6a56" stroke-width="7" stroke-linecap="round"/>
+      <text x="94" y="38" class="sans label">Delete</text>
+      <text x="94" y="66" class="sans toolName">CUSTOMER.DISABLE</text>
+    </g>
+  </g>
+
+  <path d="M1262 340 C1315 340 1330 318 1364 296" stroke="#1f6a56" stroke-width="5" fill="none" marker-end="url(#arrowGreen)"/>
+  <path d="M1262 465 C1310 465 1328 465 1366 465" stroke="#102a3a" stroke-width="5" fill="none" marker-end="url(#arrowNavy)"/>
+  <path d="M1262 586 C1316 586 1328 610 1366 632" stroke="#c47a10" stroke-width="5" fill="none" marker-end="url(#arrowGold)"/>
+  <path d="M1262 706 C1310 706 1328 706 1366 706" stroke="#1f6a56" stroke-width="5" fill="none" marker-end="url(#arrowGreen)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="1374" y="238" width="154" height="520" rx="28" fill="#ffffff"/>
+    <text x="1406" y="290" class="sans eyebrow" style="font-size:14px;letter-spacing:6px;">CUSTOMERS</text>
+    <rect x="1406" y="328" width="90" height="32" rx="16" fill="#e6efea"/>
+    <text x="1420" y="350" class="sans greenText" style="font-size:16px;font-weight:800;">active</text>
+    <rect x="1406" y="386" width="90" height="32" rx="16" fill="#e6efea"/>
+    <text x="1420" y="408" class="sans greenText" style="font-size:16px;font-weight:800;">active</text>
+    <rect x="1406" y="444" width="90" height="32" rx="16" fill="#e6efea"/>
+    <text x="1420" y="466" class="sans greenText" style="font-size:16px;font-weight:800;">active</text>
+    <rect x="1406" y="502" width="90" height="32" rx="16" fill="#e6efea"/>
+    <text x="1420" y="524" class="sans greenText" style="font-size:16px;font-weight:800;">active</text>
+    <rect x="1406" y="560" width="90" height="32" rx="16" fill="#efe8df"/>
+    <text x="1413" y="582" class="sans goldText" style="font-size:16px;font-weight:800;">pending</text>
+    <rect x="1406" y="618" width="90" height="32" rx="16" fill="#e6efea"/>
+    <text x="1420" y="640" class="sans greenText" style="font-size:16px;font-weight:800;">active</text>
+    <rect x="1406" y="676" width="90" height="32" rx="16" fill="#e8ebea"/>
+    <text x="1414" y="698" class="sans navyText" style="font-size:16px;font-weight:800;">inactive</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="650" y="58" width="878" height="112" rx="28" fill="#ffffff"/>
+    <g transform="translate(688 86)">
+      <circle cx="36" cy="36" r="32" fill="#e9f3ef"/>
+      <path d="M25 37 h22 M36 26 v22" stroke="#1f6a56" stroke-width="7" stroke-linecap="round"/>
+      <text x="84" y="32" class="sans label">Create</text>
+      <text x="84" y="62" class="sans small" style="font-size:16px;">新增客戶主檔</text>
+    </g>
+    <g transform="translate(900 86)">
+      <circle cx="36" cy="36" r="32" fill="#eef2f1"/>
+      <circle cx="33" cy="33" r="16" fill="none" stroke="#102a3a" stroke-width="6"/>
+      <path d="M47 48 l14 14" stroke="#102a3a" stroke-width="7" stroke-linecap="round"/>
+      <text x="84" y="32" class="sans label">Read</text>
+      <text x="84" y="62" class="sans small" style="font-size:16px;">查代碼、名稱、統編</text>
+    </g>
+    <g transform="translate(1112 86)">
+      <circle cx="36" cy="36" r="32" fill="#fff3df"/>
+      <path d="M25 50 l26 -26 l12 12 l-26 26 h-12 z" fill="#c47a10"/>
+      <text x="84" y="32" class="sans label">Update</text>
+      <text x="84" y="62" class="sans small" style="font-size:16px;">改電話、狀態</text>
+    </g>
+    <g transform="translate(1334 86)">
+      <circle cx="36" cy="36" r="32" fill="#e9f3ef"/>
+      <path d="M24 24 l24 24 M48 24 l-24 24" stroke="#1f6a56" stroke-width="7" stroke-linecap="round"/>
+      <text x="84" y="32" class="sans label">Delete</text>
+      <text x="84" y="62" class="sans small" style="font-size:16px;">停用保留軌跡</text>
+    </g>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="360" y="826" width="1168" height="46" rx="23" fill="url(#green)"/>
+    <text x="405" y="856" class="sans white" style="font-size:18px;font-weight:800;">安全邊界：Agent 不直接改資料庫，只能呼叫後端核准的 customer tools；敏感異動進入 Approvals，所有操作寫入 Audit Log。</text>
+  </g>
+</svg>
