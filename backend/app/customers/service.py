@@ -22,6 +22,7 @@ from app.customers.schemas import (
     CustomerContactCreate,
     CustomerContactUpdate,
     CustomerCreate,
+    CustomerListItem,
     CustomerUpdate,
     MutationResult,
 )
@@ -37,7 +38,7 @@ def list_customers(
     customer_type: str | None,
     page: int,
     page_size: int,
-) -> Page[Customer]:
+) -> Page[CustomerListItem]:
     items, total = search_customers(
         db,
         q=q,

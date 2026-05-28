@@ -27,7 +27,9 @@ export default function LoginPage() {
     try {
       const result = await login(email, password);
       setBrowserAccessToken(result.access_token);
-      router.push("/dashboard");
+      const searchParams = new URLSearchParams(window.location.search);
+      const nextPath = searchParams.get("next");
+      router.push(nextPath && nextPath.startsWith("/") ? nextPath : "/dashboard");
       router.refresh();
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Login failed");

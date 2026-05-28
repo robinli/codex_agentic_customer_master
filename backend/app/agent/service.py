@@ -72,8 +72,29 @@ def _extract_payment_terms(message: str) -> str | None:
 
 
 def _extract_phone(message: str) -> str | None:
-    match = re.search(r"改成\s*([0-9\-]+)", message)
+    match = re.search(r"(?:改成|改為|修改為|變更為)\s*([0-9\-]+)", message)
     return match.group(1) if match else None
+
+
+def _extract_customer_name_update(message: str) -> str | None:
+    if not any(term in message for term in ["名稱", "公司名稱", "客戶名稱"]):
+        return None
+    match = re.search(r"(?:公司名稱|客戶名稱|名稱)\s*(?:改成|改為|修改為|變更為)\s*([^，,。]+)", message)
+    if not match:
+        return None
+    return match.group(1).strip(" 「」'\"")
+
+
+def _extract_update_target_query(message: str) -> str | None:
+    match = re.search(
+        r"(?:將|把)?\s*(?:客戶)?\s*(?P<target>.+?)\s*(?:的)?(?:公司名稱|客戶名稱|名稱|電話|付款條件)\s*(?:改成|改為|修改為|變更為)",
+        message,
+    )
+    if not match:
+        return None
+    target = match.group("target").strip(" ，,。的")
+    target = re.sub(r"^(?:統編|客戶)\s*", "", target).strip()
+    return target or None
 
 
 def _extract_reason(message: str) -> str | None:
@@ -85,6 +106,14 @@ def _extract_reason(message: str) -> str | None:
 
 
 def _extract_customer_name_for_create(message: str) -> str | None:
+    field_match = re.search(
+        r"(?:客戶名稱|公司名稱|名稱)\s*[:：]\s*(.+?)(?=\s*(?:統編|稅籍編號|tax_id|customer_type|類型)\s*[:：]|\s*$)",
+        message,
+        flags=re.IGNORECASE,
+    )
+    if field_match:
+        return field_match.group(1).strip(" ，,。")
+
     match = re.search(r"新增一筆客戶[:：]?\s*([^，,]+)", message)
     return match.group(1).strip() if match else None
 
@@ -110,7 +139,7 @@ def _store_assistant_response(
 
 def _find_customer_candidates(db: Session, message: str) -> dict[str, Any]:
     tax_id = _extract_tax_id(message)
-    query = None if tax_id else _normalize_search_query(message)
+    query = None if tax_id else _extract_update_target_query(message) or _normalize_search_query(message)
     return customer_search_tool(db, query=query, tax_id=tax_id, status=None)
 
 
@@ -381,7 +410,21 @@ def _handle_update(db: Session, *, session_id: str, message: str, user: CurrentU
             data=result,
         )
 
-    raise bad_request("目前僅支援以自然語言更新電話或付款條件欄位，其他欄位可走 API")
+    customer_name = _extract_customer_name_update(message)
+    if customer_name:
+        payload = {"customer_name": customer_name}
+        result = customer_update_tool(db, customer_id=customer["id"], payload=payload, user=user)
+        tool_call = ToolCallResult(tool_name="customer.update", status="success", input=payload, output=result)
+        _store_message(db, session_id=session_id, role="tool", content="Customer update executed", tool_name="customer.update", tool_args=payload, tool_result=result)
+        return _store_assistant_response(
+            db,
+            session_id=session_id,
+            message=f"已更新客戶名稱為 {customer_name}。",
+            tool_calls=[tool_call],
+            data=result,
+        )
+
+    raise bad_request("目前僅支援以自然語言更新客戶名稱、電話或付款條件欄位，其他欄位可走 API")
 
 
 def _handle_disable(db: Session, *, session_id: str, message: str) -> AgentResponse:
@@ -457,7 +500,7 @@ def _execute_rule_based_message(
         return _handle_create(db, session_id=session_id, message=message, user=user)
     if "停用" in message:
         return _handle_disable(db, session_id=session_id, message=message)
-    if "改成" in message or "修改" in message:
+    if "改成" in message or "改為" in message or "修改" in message or "變更為" in message:
         return _handle_update(db, session_id=session_id, message=message, user=user)
 
     return _store_assistant_response(
@@ -469,13 +512,28 @@ def _execute_rule_based_message(
     )
 
 
+def _is_rule_based_candidate(message: str) -> bool:
+    lowered = message.lower()
+    return (
+        "查詢" in message
+        or "search" in lowered
+        or "找" in message
+        or "新增" in message
+        or "停用" in message
+        or "改成" in message
+        or "改為" in message
+        or "修改" in message
+        or "變更為" in message
+    )
+
+
 def handle_message(db: Session, *, session_id: str, message: str, user: CurrentUser) -> AgentResponse:
     session = db.get(AgentSession, uuid.UUID(session_id))
     if not session or str(session.user_id) != user.id:
         raise not_found("Session not found")
 
     pending = _get_active_pending_action(db, session_id=session_id)
-    if pending:
+    if pending or _is_rule_based_candidate(message):
         return _execute_rule_based_message(db, session_id=session_id, message=message, user=user)
 
     _store_message(db, session_id=session_id, role="user", content=message)

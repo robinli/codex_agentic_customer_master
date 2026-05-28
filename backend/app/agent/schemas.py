@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Any
+import uuid
 
 from pydantic import BaseModel
 
@@ -9,8 +10,8 @@ class AgentSessionCreate(BaseModel):
 
 
 class AgentSessionRead(BaseModel):
-    id: str
-    user_id: str
+    id: uuid.UUID
+    user_id: uuid.UUID
     title: str | None
     created_at: datetime
     updated_at: datetime
@@ -23,8 +24,8 @@ class AgentMessageCreate(BaseModel):
 
 
 class AgentMessageRead(BaseModel):
-    id: str
-    session_id: str
+    id: uuid.UUID
+    session_id: uuid.UUID
     role: str
     content: str
     tool_name: str | None
@@ -46,4 +47,3 @@ class AgentResponse(BaseModel):
     message: str
     tool_calls: list[ToolCallResult]
     data: dict[str, Any] | None = None
-

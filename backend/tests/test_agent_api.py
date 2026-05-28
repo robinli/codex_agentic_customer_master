@@ -47,6 +47,40 @@ def test_agent_tool_customer_update_sensitive_field_creates_approval(client: Tes
     assert confirm_response.json()["data"]["status"] == "approval_required"
 
 
+def test_agent_tool_customer_update_name_success(client: TestClient, created_customer_id: str) -> None:
+    session_id = create_session(client, "update-name")
+
+    response = client.post(
+        f"/api/v1/agent/sessions/{session_id}/messages",
+        headers=TEST_HEADERS,
+        json={"message": "將統編 12345678 的客戶名稱改為 CKK"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["tool_calls"][0]["tool_name"] == "customer.update"
+    assert response.json()["data"]["status"] == "updated"
+
+    customer_response = client.get(f"/api/v1/customers/{created_customer_id}", headers=TEST_HEADERS)
+    assert customer_response.json()["customer_name"] == "CKK"
+
+
+def test_agent_tool_customer_update_phone_by_name_success(client: TestClient, created_customer_id: str) -> None:
+    session_id = create_session(client, "update-phone-name")
+
+    response = client.post(
+        f"/api/v1/agent/sessions/{session_id}/messages",
+        headers=TEST_HEADERS,
+        json={"message": "把大明有限公司電話改成 07-2235803"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["tool_calls"][0]["tool_name"] == "customer.update"
+    assert response.json()["data"]["status"] == "updated"
+
+    customer_response = client.get(f"/api/v1/customers/{created_customer_id}", headers=TEST_HEADERS)
+    assert customer_response.json()["phone"] == "07-2235803"
+
+
 def test_agent_search_multiple_results_asks_for_clarification(client: TestClient, created_customer_id: str) -> None:
     client.post(
         "/api/v1/customers",
@@ -70,6 +104,23 @@ def test_agent_search_multiple_results_asks_for_clarification(client: TestClient
     assert response.status_code == 200
     assert "查到多筆客戶" in response.json()["message"]
     assert len(response.json()["data"]["items"]) == 2
+
+
+def test_agent_create_customer_with_labeled_name_and_tax_id(client: TestClient) -> None:
+    session_id = create_session(client, "create-labeled-customer")
+
+    response = client.post(
+        f"/api/v1/agent/sessions/{session_id}/messages",
+        headers=TEST_HEADERS,
+        json={"message": "新增客戶 名稱:大王紅茶 統編:99990000"},
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["tool_calls"][0]["tool_name"] == "customer.create"
+    assert body["tool_calls"][0]["input"]["customer_name"] == "大王紅茶"
+    assert body["tool_calls"][0]["input"]["tax_id"] == "99990000"
+    assert body["data"]["customer_name"] == "大王紅茶"
 
 
 def test_agent_sensitive_change_without_reason_requests_reason(client: TestClient, created_customer_id: str) -> None:

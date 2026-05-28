@@ -2,7 +2,6 @@ from functools import lru_cache
 import json
 from typing import List
 
-from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -47,18 +46,15 @@ class Settings(BaseSettings):
             },
         ]
     )
-    cors_origins: List[str] = ["http://localhost:3000"]
+    cors_origins: str = "http://localhost:3000"
     default_page_size: int = 20
     max_page_size: int = 100
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    @field_validator("cors_origins", mode="before")
-    @classmethod
-    def split_origins(cls, value: str | List[str]) -> List[str]:
-        if isinstance(value, list):
-            return value
-        return [item.strip() for item in value.split(",") if item.strip()]
+    @property
+    def cors_origin_list(self) -> List[str]:
+        return [item.strip() for item in self.cors_origins.split(",") if item.strip()]
 
 
 @lru_cache
