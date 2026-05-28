@@ -6,6 +6,8 @@ Monorepo for a customer master maintenance system with:
 - Approval workflow for sensitive changes
 - Agent chat interface that only acts through backend tools
 
+![Agentic Customer Master infographic](docs/images/agentic-customer-master-infographic.png)
+
 ## Structure
 
 ```text
